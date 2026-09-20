@@ -1,5 +1,6 @@
 /**
- * Arma el mapa de fotos de productos leyendo public/img/productos/.
+ * Arma el mapa de fotos de productos leyendo public/img/productos/ y la lista
+ * de fotos de la galería leyendo public/img/galeria/.
  *
  * La regla es una sola: **el archivo se llama igual que el `id` del producto**
  * (catena-malbec.jpg → producto "catena-malbec"). Sirve cualquier extensión.
@@ -9,7 +10,7 @@
  * Se ejecuta antes de `npm run dev` y de `npm run build`. Si agregás una foto
  * con el servidor de desarrollo andando, reinicialo para que la tome.
  */
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { basename, extname, resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -71,4 +72,27 @@ if (sinProducto.length > 0) {
       .map((archivo) => `    • ${archivo}`)
       .join('\n')}`,
   )
+}
+
+/* --------------------------------------------------------------------------
+   Galería del local: public/img/galeria/
+   Acá no hay ids que respetar, entra todo lo que haya en la carpeta. El orden
+   es el del nombre del archivo (galeria-2 antes que galeria-10), así alcanza
+   con numerar las fotos para decidir cómo se ven en la grilla.
+   -------------------------------------------------------------------------- */
+const CARPETA_GALERIA = 'public/img/galeria'
+
+const porNombre = new Intl.Collator('es', { numeric: true, sensitivity: 'base' })
+
+const fotos = (existsSync(resolve(raiz, CARPETA_GALERIA)) ? readdirSync(resolve(raiz, CARPETA_GALERIA)) : [])
+  .filter((archivo) => EXTENSIONES.includes(extname(archivo).toLowerCase()))
+  .sort(porNombre.compare)
+  .map((archivo) => `/img/galeria/${archivo}`)
+
+writeFileSync(resolve(raiz, 'src/data/galeria.generado.json'), `${JSON.stringify(fotos, null, 2)}\n`)
+
+console.log(`galería: ${fotos.length} foto(s) en ${CARPETA_GALERIA}`)
+
+if (fotos.length === 0) {
+  console.log(`  la sección Galería no se va a mostrar: guardá las fotos en ${CARPETA_GALERIA}/`)
 }
