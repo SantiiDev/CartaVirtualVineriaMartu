@@ -12,11 +12,11 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-3">
           <div>
             <img
-              src="/img/logo-martu-claro.svg"
+              src="/img/logo-martu.png"
               alt={NEGOCIO.nombre}
               className="h-20 w-auto"
-              width={300}
-              height={160}
+              width={355}
+              height={208}
             />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-crema/70">
               Vinos y bebidas en {NEGOCIO.direccion.zona}. Atendida por sus dueños desde {NEGOCIO.desde}.

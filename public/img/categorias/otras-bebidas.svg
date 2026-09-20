@@ -1,15 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="OTRAS BEBIDAS">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Botella de whisky y vaso corto con hielo">
+  <!--
+    Tarjeta "Otras bebidas" (cervezas, aperitivos y destilados).
+
+    Se dibuja un whisky porque es lo que mejor representa al grupo de un
+    vistazo: botella de hombro angular y vaso corto, dos formas que no se
+    confunden con las de vino ni con las de espumante en miniatura.
+
+    Mismas reglas que las otras dos: el dibujo arriba, líneas gruesas, porque
+    abajo lo tapa el degradado con el título.
+  -->
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#6e1214" />
+    <!-- Fondo gris cálido, no ámbar: la tarjeta de espumantes ya es dorada y
+         con dos fondos parecidos las dos se confunden en la grilla. Acá el
+         ámbar queda solo en la bebida, que es lo que tiene que saltar. -->
+    <linearGradient id="fondo" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#4a4442" />
+      <stop offset="50%" stop-color="#2b2724" />
       <stop offset="100%" stop-color="#1c1a19" />
     </linearGradient>
+
+    <linearGradient id="ambar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e0a233" />
+      <stop offset="100%" stop-color="#a8611a" />
+    </linearGradient>
+
+    <!-- Recorta el líquido para que siga la forma del vaso. -->
+    <clipPath id="dentroDelVaso">
+      <path d="M520 462 L536 660 Q538 678 556 678 L652 678 Q670 678 672 660 L688 462 Z" />
+    </clipPath>
   </defs>
-  <rect width="800" height="1000" fill="url(#g)" />
-  <g opacity="0.14" fill="none" stroke="#faf6ef" stroke-width="2">
-    <circle cx="400" cy="500" r="160" />
-    <circle cx="400" cy="500" r="231.99999999999997" />
+
+  <rect width="800" height="1000" fill="url(#fondo)" />
+
+  <circle cx="400" cy="430" r="300" fill="none" stroke="#faf6ef" stroke-width="2" opacity="0.10" />
+  <circle cx="400" cy="430" r="215" fill="none" stroke="#faf6ef" stroke-width="2" opacity="0.07" />
+
+  <!-- Botella de whisky: hombro angular, cuerpo ancho y bajo. -->
+  <g>
+    <path d="M265 254 Q265 240 279 240 L321 240 Q335 240 335 254
+             L335 348 L405 424
+             L405 676 Q405 700 381 700 L219 700 Q195 700 195 676
+             L195 424 L265 348 Z"
+          fill="#3a2313" stroke="#faf6ef" stroke-width="6" stroke-opacity="0.7" />
+
+    <!-- Whisky adentro de la botella. -->
+    <path d="M195 470 L405 470 L405 676 Q405 700 381 700 L219 700 Q195 700 195 676 Z"
+          fill="url(#ambar)" opacity="0.85" />
+
+    <!-- Tapa. -->
+    <rect x="261" y="196" width="78" height="52" rx="6" fill="#1c1a19" stroke="#faf6ef" stroke-width="5" stroke-opacity="0.6" />
+
+    <rect x="222" y="494" width="156" height="120" rx="3" fill="#faf6ef" opacity="0.93" />
+    <g stroke="#4a2c10" stroke-width="5" opacity="0.6">
+      <line x1="248" y1="536" x2="352" y2="536" />
+      <line x1="266" y1="564" x2="334" y2="564" />
+    </g>
+    <circle cx="300" cy="590" r="11" fill="none" stroke="#a8611a" stroke-width="4" opacity="0.7" />
   </g>
-  <text x="400" y="512" text-anchor="middle" font-family="Georgia, serif"
-        font-size="28" letter-spacing="4" fill="#faf6ef" opacity="0.5">OTRAS BEBIDAS</text>
+
+  <!-- Vaso corto, apenas cónico. -->
+  <g>
+    <g clip-path="url(#dentroDelVaso)">
+      <rect x="500" y="556" width="220" height="160" fill="url(#ambar)" opacity="0.9" />
+    </g>
+
+    <!-- Hielo: dos cubos apoyados en la superficie del whisky. -->
+    <g fill="#faf6ef" fill-opacity="0.45" stroke="#faf6ef" stroke-width="4" stroke-opacity="0.75">
+      <rect x="546" y="556" width="62" height="58" rx="8" transform="rotate(-9 577 585)" />
+      <rect x="608" y="580" width="56" height="52" rx="8" transform="rotate(7 636 606)" />
+    </g>
+
+    <path d="M520 462 L536 660 Q538 678 556 678 L652 678 Q670 678 672 660 L688 462 Z"
+          fill="none" stroke="#faf6ef" stroke-width="7" stroke-opacity="0.85" />
+    <ellipse cx="604" cy="462" rx="84" ry="14" fill="none" stroke="#faf6ef" stroke-width="7" stroke-opacity="0.85" />
+  </g>
+
+  <line x1="150" y1="702" x2="700" y2="702" stroke="#f2c230" stroke-width="3" opacity="0.4" />
 </svg>

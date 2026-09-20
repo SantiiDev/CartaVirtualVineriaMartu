@@ -1,15 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="ESPUMANTES">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Botella de espumante con dos copas flauta y burbujas">
+  <!--
+    Tarjeta "Espumantes". Mismas reglas que vinos.svg: el dibujo va arriba,
+    líneas gruesas, porque abajo lo tapa el degradado con el título.
+
+    La botella es la de espumante (hombro largo y caído, cuerpo más ancho) y
+    las copas son flautas, para que se distinga de la tarjeta de vinos de un
+    vistazo, incluso en miniatura.
+  -->
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#a8791a" />
-      <stop offset="100%" stop-color="#3a2418" />
+    <linearGradient id="fondo" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#c29327" />
+      <stop offset="50%" stop-color="#6b4a14" />
+      <stop offset="100%" stop-color="#20180e" />
+    </linearGradient>
+
+    <linearGradient id="burbujeo" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#f2c230" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#f2c230" stop-opacity="0.45" />
     </linearGradient>
   </defs>
-  <rect width="800" height="1000" fill="url(#g)" />
-  <g opacity="0.14" fill="none" stroke="#faf6ef" stroke-width="2">
-    <circle cx="400" cy="500" r="160" />
-    <circle cx="400" cy="500" r="231.99999999999997" />
+
+  <rect width="800" height="1000" fill="url(#fondo)" />
+
+  <circle cx="400" cy="430" r="300" fill="none" stroke="#faf6ef" stroke-width="2" opacity="0.10" />
+  <circle cx="400" cy="430" r="215" fill="none" stroke="#faf6ef" stroke-width="2" opacity="0.07" />
+
+  <!-- Botella de espumante. -->
+  <g>
+    <path d="M259 208 Q259 192 275 192 L305 192 Q321 192 321 208
+             L321 336 C321 388 375 408 375 486
+             L375 678 Q375 700 353 700 L227 700 Q205 700 205 678
+             L205 486 C205 408 259 388 259 336 Z"
+          fill="#2f3a22" stroke="#faf6ef" stroke-width="6" stroke-opacity="0.7" />
+
+    <!-- Capuchón dorado y el bozal del corcho. -->
+    <path d="M255 206 Q255 190 272 190 L308 190 Q325 190 325 206 L325 330 L255 330 Z"
+          fill="#f2c230" opacity="0.9" />
+    <line x1="255" y1="296" x2="325" y2="296" stroke="#6b4a14" stroke-width="7" opacity="0.7" />
+
+    <rect x="216" y="500" width="148" height="132" rx="3" fill="#faf6ef" opacity="0.92" />
+    <g stroke="#6b4a14" stroke-width="5" opacity="0.55">
+      <line x1="240" y1="544" x2="340" y2="544" />
+      <line x1="256" y1="572" x2="324" y2="572" />
+    </g>
   </g>
-  <text x="400" y="512" text-anchor="middle" font-family="Georgia, serif"
-        font-size="28" letter-spacing="4" fill="#faf6ef" opacity="0.5">ESPUMANTES</text>
+
+  <!-- Flauta de atrás, más corta. -->
+  <g opacity="0.75">
+    <path d="M578 366 A38 8 0 0 0 654 366 C654 476 642 508 616 508 C590 508 578 476 578 366 Z"
+          fill="#faf6ef" fill-opacity="0.10" stroke="#faf6ef" stroke-width="5" stroke-opacity="0.8" />
+    <path d="M583 424 A33 7 0 0 0 649 424 C648 482 638 508 616 508 C594 508 584 482 583 424 Z"
+          fill="url(#burbujeo)" />
+    <ellipse cx="616" cy="366" rx="38" ry="8" fill="none" stroke="#faf6ef" stroke-width="5" stroke-opacity="0.8" />
+    <rect x="610" y="506" width="12" height="164" fill="#faf6ef" opacity="0.8" />
+    <ellipse cx="616" cy="682" rx="44" ry="11" fill="none" stroke="#faf6ef" stroke-width="5" stroke-opacity="0.8" />
+  </g>
+
+  <!-- Flauta de adelante. -->
+  <g>
+    <path d="M472 308 A42 9 0 0 0 556 308 C556 448 542 486 514 486 C486 486 472 448 472 308 Z"
+          fill="#faf6ef" fill-opacity="0.12" stroke="#faf6ef" stroke-width="6" stroke-opacity="0.85" />
+    <path d="M478 380 A36 8 0 0 0 550 380 C549 452 538 486 514 486 C490 486 479 452 478 380 Z"
+          fill="url(#burbujeo)" />
+    <ellipse cx="514" cy="308" rx="42" ry="9" fill="none" stroke="#faf6ef" stroke-width="6" stroke-opacity="0.85" />
+    <rect x="507" y="484" width="14" height="186" fill="#faf6ef" opacity="0.85" />
+    <ellipse cx="514" cy="684" rx="50" ry="12" fill="none" stroke="#faf6ef" stroke-width="6" stroke-opacity="0.85" />
+  </g>
+
+  <!-- Burbujas: adentro de las copas y subiendo desde el corcho. -->
+  <g fill="#faf6ef">
+    <circle cx="502" cy="428" r="7" opacity="0.85" />
+    <circle cx="527" cy="398" r="5" opacity="0.7" />
+    <circle cx="508" cy="360" r="6" opacity="0.6" />
+    <circle cx="530" cy="452" r="5" opacity="0.75" />
+    <circle cx="609" cy="470" r="5" opacity="0.7" />
+    <circle cx="625" cy="440" r="4" opacity="0.55" />
+    <circle cx="290" cy="150" r="9" opacity="0.55" />
+    <circle cx="335" cy="112" r="6" opacity="0.4" />
+    <circle cx="246" cy="108" r="5" opacity="0.35" />
+    <circle cx="310" cy="66" r="4" opacity="0.28" />
+  </g>
+
+  <line x1="140" y1="702" x2="680" y2="702" stroke="#f2c230" stroke-width="3" opacity="0.4" />
 </svg>

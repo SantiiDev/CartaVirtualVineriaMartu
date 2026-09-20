@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 import { PRODUCTOS } from '../../data/catalogo'
 import { linkCarta } from '../../hooks/useFiltrosCarta'
-import type { TipoVino } from '../../lib/vinos'
-import { tipoDeVino, varietalesDe } from '../../lib/vinos'
 import type { Categoria } from '../../types/producto'
 import { OTRAS_BEBIDAS } from '../layout/navegacion'
 import { Imagen } from '../ui/Imagen'
@@ -20,39 +18,29 @@ interface Tarjeta {
 const contar = (predicado: (categoria: Categoria) => boolean) =>
   PRODUCTOS.filter((producto) => predicado(producto.categoria)).length
 
-const contarVinos = (tipo: TipoVino) => PRODUCTOS.filter((producto) => tipoDeVino(producto) === tipo).length
-
 /**
  * Accesos rápidos a la carta ya filtrada.
  *
- * Tinto, blanco y rosado no son categorías del JSON: se derivan del varietal
- * (ver lib/vinos.ts), así el dueño solo carga el dato que tiene en la etiqueta.
+ * Los vinos van todos en una sola tarjeta: tinto, blanco y rosado no son
+ * categorías del JSON, se derivan del varietal, y separarlos acá dejaba dos
+ * tarjetas invisibles mientras la carta no tenga blancos ni rosados. Para
+ * elegir por color está el panel de filtros de la carta.
  *
- * Las tarjetas sin productos no se muestran: si mañana no hay rosados en la
- * carta, la tarjeta desaparece sola en vez de llevar a un resultado vacío.
+ * La clasificación por color sigue disponible en lib/vinos.ts (hoy sin uso):
+ * es lo que habría que volver a enganchar si alguna vez se quiere una tarjeta
+ * por tipo de vino.
+ *
+ * Las tarjetas sin productos no se muestran: si mañana no hubiera espumantes,
+ * la tarjeta desaparece sola en vez de llevar a un resultado vacío.
  */
 function tarjetas(): Tarjeta[] {
   const todas: Tarjeta[] = [
     {
-      etiqueta: 'Tintos',
-      descripcion: 'Malbec, Cabernet, Blends y más',
-      imagen: '/img/categorias/tintos.svg',
-      a: linkCarta({ categoria: 'vino', subcategorias: varietalesDe(PRODUCTOS, 'tinto') }),
-      cantidad: contarVinos('tinto'),
-    },
-    {
-      etiqueta: 'Blancos',
-      descripcion: 'Frescos, para tomar bien fríos',
-      imagen: '/img/categorias/blancos.svg',
-      a: linkCarta({ categoria: 'vino', subcategorias: varietalesDe(PRODUCTOS, 'blanco') }),
-      cantidad: contarVinos('blanco'),
-    },
-    {
-      etiqueta: 'Rosados',
-      descripcion: 'Livianos y versátiles',
-      imagen: '/img/categorias/rosados.svg',
-      a: linkCarta({ categoria: 'vino', subcategorias: varietalesDe(PRODUCTOS, 'rosado') }),
-      cantidad: contarVinos('rosado'),
+      etiqueta: 'Vinos',
+      descripcion: 'Tintos, blancos y rosados',
+      imagen: '/img/categorias/vinos.svg',
+      a: linkCarta({ categoria: 'vino' }),
+      cantidad: contar((categoria) => categoria === 'vino'),
     },
     {
       etiqueta: 'Espumantes',
@@ -111,7 +99,7 @@ export function CategoriasGrid() {
                   <Imagen
                     src={tarjeta.imagen}
                     alt=""
-                    fallback="/img/categorias/tintos.svg"
+                    fallback="/img/categorias/vinos.svg"
                     className="aspect-[4/5] w-full object-cover opacity-70 transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-carbon/90 to-transparent p-5">

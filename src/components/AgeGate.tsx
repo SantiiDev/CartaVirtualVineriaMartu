@@ -39,11 +39,11 @@ export function AgeGate({ children }: { children: ReactNode }) {
         className="w-full max-w-md rounded-sm bg-crema px-6 py-10 text-center shadow-2xl sm:px-10"
       >
         <img
-          src="/img/logo-martu.svg"
+          src="/img/logo-martu.png"
           alt={NEGOCIO.nombre}
           className="mx-auto h-24 w-auto"
-          width={300}
-          height={160}
+          width={355}
+          height={208}
         />
 
         {abierto ? (

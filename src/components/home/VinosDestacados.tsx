@@ -20,7 +20,7 @@ export function VinosDestacados() {
             copete="Selección de la casa"
             bajada="Las botellas que más recomendamos esta temporada."
           >
-            Nuestros vinos
+            Nuestras bebidas destacadas
           </SectionTitle>
         </Reveal>
 

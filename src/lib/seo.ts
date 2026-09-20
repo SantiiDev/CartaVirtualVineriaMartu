@@ -25,7 +25,7 @@ export function schemaNegocio() {
     '@context': 'https://schema.org',
     '@type': 'LiquorStore',
     name: NEGOCIO.nombre,
-    image: urlAbsoluta('/img/logo-martu.svg'),
+    image: urlAbsoluta('/img/logo-martu.png'),
     url: NEGOCIO.sitioUrl,
     telephone: NEGOCIO.telefono.tel,
     priceRange: '$$',

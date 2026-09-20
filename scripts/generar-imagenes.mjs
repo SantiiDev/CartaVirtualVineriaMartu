@@ -77,8 +77,11 @@ if (sinProducto.length > 0) {
 /* --------------------------------------------------------------------------
    Galería del local: public/img/galeria/
    Acá no hay ids que respetar, entra todo lo que haya en la carpeta. El orden
-   es el del nombre del archivo (galeria-2 antes que galeria-10), así alcanza
-   con numerar las fotos para decidir cómo se ven en la grilla.
+   es el del nombre del archivo, y los números se ordenan como números (foto-2
+   antes que foto-10), así alcanza con numerarlas para decidir el orden.
+
+   Ojo: estas fotos no se guardan a mano. Las genera `npm run fotos` a partir
+   de fotos-originales/galeria/, ya recortadas y livianas (ver el README).
    -------------------------------------------------------------------------- */
 const CARPETA_GALERIA = 'public/img/galeria'
 

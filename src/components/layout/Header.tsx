@@ -34,11 +34,11 @@ export function Header() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to="/" className="flex items-center gap-3" aria-label={`${NEGOCIO.nombre}, ir al inicio`}>
           <img
-            src={solido ? '/img/logo-martu.svg' : '/img/logo-martu-claro.svg'}
+            src="/img/logo-martu.png"
             alt={NEGOCIO.nombre}
             className="h-13 w-auto"
-            width={300}
-            height={160}
+            width={355}
+            height={208}
           />
         </Link>
 

@@ -9,23 +9,20 @@ import { SectionTitle } from '../ui/SectionTitle'
  * La lista sale de public/img/galeria/: entra todo lo que haya en la carpeta,
  * con cualquier extensión y en el orden del nombre del archivo (la arma
  * scripts/generar-imagenes.mjs antes de cada dev/build). Para sumar una foto
- * alcanza con guardarla ahí; no hay que tocar este archivo.
+ * se guarda el original en fotos-originales/galeria/ y se corre `npm run fotos`,
+ * que la recorta y la deja liviana; este archivo no se toca.
  *
- * Las fotos no vienen todas del mismo tamaño ni con la misma orientación, así
- * que cada una se recorta a un cuadrado con object-cover: la grilla queda
- * pareja aunque haya verticales, horizontales y capturas de celular mezcladas.
+ * Las fotos vienen recortadas a cuadrado desde el script, en la medida en la
+ * que se muestran: la grilla queda pareja y el navegador no tiene que achicar
+ * una foto de celular de varios megas en cada carga.
  */
 
 /** Descripción para lectores de pantalla, por nombre de archivo sin extensión. */
 const TEXTOS_ALT: Record<string, string> = {
-  'galeria-1': 'Salón de la vinería',
-  'galeria-2': 'Estantería con botellas de vino',
-  'galeria-3': 'Mostrador de atención',
-  'galeria-4': 'Selección de vinos tintos',
-  'galeria-5': 'Vidriera del local',
-  'galeria-6': 'Detalle de etiquetas',
-  'galeria-7': 'Sector de guarda',
-  'galeria-8': 'Fachada de Vinería Martu',
+  'caja-vinos-vineria': 'Caja abierta con seis botellas de Malbec listas para llevar',
+  'cajas-vineria': 'Estantería con whiskies, gins y licores',
+  'estuches-vineria': 'Estuches de regalo y botellas en las estanterías del local',
+  'vidriera-vineria': 'Vidriera con whiskies importados y vinos de guarda',
 }
 
 const textoAlt = (ruta: string, indice: number) => {
@@ -52,7 +49,7 @@ export function Galeria() {
                 <Imagen
                   src={ruta}
                   alt={textoAlt(ruta, indice)}
-                  fallback="/img/hero.svg"
+                  fallback="/img/placeholder-foto.svg"
                   className="aspect-square w-full object-cover object-center transition-transform duration-500 hover:scale-105"
                 />
               </li>

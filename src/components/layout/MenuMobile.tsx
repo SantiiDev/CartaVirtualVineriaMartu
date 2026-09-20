@@ -39,7 +39,7 @@ export function MenuMobile({ abierto, alCerrar }: Props) {
         className="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-crema px-6 pt-6 pb-10 shadow-xl"
       >
         <div className="flex items-center justify-between">
-          <img src="/img/logo-martu.svg" alt={NEGOCIO.nombre} className="h-12 w-auto" width={300} height={160} />
+          <img src="/img/logo-martu.png" alt={NEGOCIO.nombre} className="h-12 w-auto" width={355} height={208} />
           <button
             type="button"
             onClick={cerrar}

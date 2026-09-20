@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Dos botellas de vino y una copa servida">
+  <!--
+    Tarjeta "Vinos" de la grilla del inicio.
+
+    Se muestra a ~250 px de ancho, con opacity-70 y un degradado oscuro encima
+    que tapa la parte de abajo (ahí van el título y la bajada). Por eso el
+    dibujo vive en la mitad de arriba, las líneas son gruesas y el contraste
+    alto: a ese tamaño los detalles finos se pierden.
+
+    Son dos botellas, una tinta y una blanca, porque la tarjeta lleva a todos
+    los vinos y no solo a los tintos.
+  -->
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#7a1418" />
+      <stop offset="55%" stop-color="#3d0f12" />
+      <stop offset="100%" stop-color="#1c1a19" />
+    </linearGradient>
+
+    <!-- Silueta de botella, usada dos veces con distinto color. -->
+    <path id="botella"
+          d="M219 214 Q219 200 233 200 L247 200 Q261 200 261 214
+             L261 352 C261 386 305 398 305 452
+             L305 682 Q305 700 287 700 L193 700 Q175 700 175 682
+             L175 452 C175 398 219 386 219 352 Z" />
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#fondo)" />
+
+  <!-- Halo de fondo, el mismo recurso gráfico que usan las otras tarjetas. -->
+  <circle cx="400" cy="430" r="300" fill="none" stroke="#faf6ef" stroke-width="2" opacity="0.10" />
+  <circle cx="400" cy="430" r="215" fill="none" stroke="#faf6ef" stroke-width="2" opacity="0.07" />
+
+  <!-- Botella de vino blanco: corrida, más chica y apoyada un poco más arriba
+       que la tinta, que es lo que la hace leer como que está atrás. -->
+  <g transform="translate(159,32) scale(0.94)">
+    <use href="#botella" fill="#2f4128" stroke="#faf6ef" stroke-width="6" stroke-opacity="0.55" />
+    <path d="M215 214 Q215 200 231 200 L249 200 Q265 200 265 214 L265 292 L215 292 Z"
+          fill="#a8791a" stroke="#faf6ef" stroke-width="5" stroke-opacity="0.45" />
+    <rect x="183" y="496" width="114" height="124" rx="3" fill="#f0e8db" opacity="0.88" />
+    <g stroke="#4a4442" stroke-width="5" opacity="0.5">
+      <line x1="203" y1="536" x2="277" y2="536" />
+      <line x1="215" y1="562" x2="265" y2="562" />
+    </g>
+  </g>
+
+  <!-- Botella de vino tinto: adelante. -->
+  <g>
+    <use href="#botella" fill="#40161a" stroke="#faf6ef" stroke-width="6" stroke-opacity="0.7" />
+    <path d="M215 214 Q215 200 231 200 L249 200 Q265 200 265 214 L265 292 L215 292 Z"
+          fill="#9b1b1e" stroke="#faf6ef" stroke-width="5" stroke-opacity="0.5" />
+    <rect x="183" y="496" width="114" height="124" rx="3" fill="#faf6ef" opacity="0.92" />
+    <g stroke="#6e1214" stroke-width="5" opacity="0.55">
+      <line x1="203" y1="536" x2="277" y2="536" />
+      <line x1="215" y1="562" x2="265" y2="562" />
+    </g>
+  </g>
+
+  <!-- Copa servida. -->
+  <g>
+    <path d="M488 330 A72 13 0 0 0 632 330 C632 450 602 492 560 492 C518 492 488 450 488 330 Z"
+          fill="#faf6ef" fill-opacity="0.10" stroke="#faf6ef" stroke-width="6" stroke-opacity="0.75" />
+    <path d="M497 392 A63 11 0 0 0 623 392 C619 452 595 492 560 492 C525 492 501 452 497 392 Z"
+          fill="#9b1b1e" opacity="0.92" />
+    <ellipse cx="560" cy="330" rx="72" ry="13" fill="none" stroke="#faf6ef" stroke-width="6" stroke-opacity="0.75" />
+    <rect x="553" y="490" width="14" height="184" fill="#faf6ef" opacity="0.75" />
+    <ellipse cx="560" cy="684" rx="64" ry="15" fill="none" stroke="#faf6ef" stroke-width="6" stroke-opacity="0.75" />
+  </g>
+
+  <!-- Piso: apoya el conjunto y separa el dibujo del degradado del texto. -->
+  <line x1="140" y1="702" x2="670" y2="702" stroke="#f2c230" stroke-width="3" opacity="0.35" />
+</svg>

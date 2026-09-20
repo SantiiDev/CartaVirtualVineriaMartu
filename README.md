@@ -25,6 +25,7 @@ Otros comandos:
 | `npm run build` | Genera el sitio final en `dist/` (y regenera el mapa de fotos y el `sitemap.xml`) |
 | `npm run preview` | Sirve lo que generó `build`, para revisarlo antes de publicar |
 | `npm run imagenes` | Vuelve a leer las fotos de `public/img/productos/` y avisa a qué productos les falta |
+| `npm run fotos` | Optimiza las fotos del local y el logo desde `fotos-originales/` (ver "Cómo reemplazar las imágenes") |
 | `npm run lint` | Revisa el código |
 | `npm run typecheck` | Verifica los tipos de TypeScript |
 
@@ -140,8 +141,12 @@ No hay que cargar la lista de bodegas ni de varietales en ningún lado: **los fi
 arman leyendo los productos**. Si se agrega un vino de una bodega nueva, esa bodega aparece sola en
 el panel de filtros.
 
-Lo mismo con "Tintos / Blancos / Rosados" del inicio: se deducen del varietal. Si se carga un
-varietal blanco que el sitio no conoce, se puede sumar a la lista en `src/lib/vinos.ts`.
+En el inicio, "Explorá por categoría" muestra tres tarjetas —Vinos, Espumantes y Otras bebidas— y
+cada una lleva a la carta ya filtrada. La tarjeta que se queda sin productos desaparece sola.
+
+> El sitio también sabe clasificar los vinos por color (tinto / blanco / rosado) deduciéndolo del
+> varietal: está en `src/lib/vinos.ts`, hoy sin usar. Es el archivo a tocar si alguna vez se quiere
+> una tarjeta por color en el inicio, o sumar un varietal blanco que el sitio todavía no conoce.
 
 ---
 
@@ -152,22 +157,58 @@ listo, no hay que tocar código.
 
 | Qué | Dónde va |
 |---|---|
-| **Logo** | `public/img/logo-martu.svg` y `public/img/logo-martu-claro.svg` (este último es el del footer oscuro) |
+| **Logo** | `public/img/logo-martu.png` — lo genera `npm run fotos` (ver abajo) |
 | **Fotos de productos** | `public/img/productos/`, con el `id` del producto como nombre (ver arriba) |
 | **Fotos descartadas** | `public/img/productos/duplicadas/` — quedan guardadas ahí y el sitio las ignora |
-| **Foto del hero** (portada) | `public/img/hero.svg` |
-| **Foto de "Sobre nosotros"** | `public/img/nosotros.svg` |
-| **Galería del local** | `public/img/galeria/galeria-1.svg` a `galeria-8.svg` |
+| **Foto del hero** (portada) | `public/img/hero.webp` — la genera `npm run fotos` |
+| **Foto de "Sobre Vinería Martu"** | `public/img/nosotros.webp` — lo genera `npm run fotos` |
+| **Galería del local** | `public/img/galeria/` — los genera `npm run fotos` |
 | **Tarjetas de categoría** | `public/img/categorias/` |
 | **Imagen para compartir** (WhatsApp, redes) | `public/og-image.png` — conviene 1200×630 px |
 | **Favicon** | `public/favicon.svg` |
+| **Relleno de fotos** | `public/img/placeholder-foto.svg` — solo se ve si falta alguna foto grande |
 
-> Las imágenes que vienen ahora son **placeholders** hechos a mano, no fotos reales.
-> El logo es una recreación: hay que reemplazarlo por el archivo original.
+> Las tarjetas de categoría son dibujos SVG hechos a medida (`vinos`, `espumantes` y
+> `otras-bebidas`), no fotos: se editan como archivo de texto.
 
-Las fotos de productos aceptan cualquier extensión sin tocar nada. Para el resto (hero, galería,
-categorías), si subís `.jpg` o `.png` en lugar de `.svg` hay que actualizar la extensión en los
-componentes de `src/components/home/`.
+Las fotos de productos aceptan cualquier extensión sin tocar nada. Para el resto, si cambiás la
+extensión de un archivo hay que actualizarla también en el componente que lo usa
+(`src/components/home/`).
+
+### Las fotos del local y el logo: `npm run fotos`
+
+Una foto de celular pesa 3–5 MB y mide 3213×5712 px, pero en el sitio se ve a 300 px. Si se sube
+tal cual, el navegador descarga varios megas por foto y las achica al vuelo: el inicio se traba y la
+galería se ve sucia. Por eso hay dos carpetas:
+
+| Carpeta | Qué tiene |
+|---|---|
+| `fotos-originales/` | Las fotos **como vinieron**. No se publica: es el archivo de originales |
+| `public/img/` | Lo que realmente se sube, ya recortado y liviano (~100 KB por foto) |
+
+```bash
+npm run fotos
+```
+
+Lee `fotos-originales/`, genera las versiones optimizadas en `public/img/` y actualiza el listado de
+la galería. Se corre **solo cuando cambian las fotos** (no en cada `npm run dev`).
+
+Qué sale de dónde:
+
+| Original | Se convierte en |
+|---|---|
+| `fotos-originales/logo-vineriamartu.jpeg` | `public/img/logo-martu.png`, con el fondo blanco sacado para que se vea bien sobre el header claro y sobre el footer oscuro |
+| `fotos-originales/frente-vineria-martu.jpg` | `public/img/hero.webp`, recortada 3:4 para la portada del inicio |
+| `fotos-originales/tablas-vineria.jpg` | `public/img/nosotros.webp`, recortada 4:5 para "Sobre Vinería Martu" |
+| `fotos-originales/galeria/*` | `public/img/galeria/*.webp`, cuadradas de 900 px |
+
+**Para cambiar la galería**: agregá o sacá fotos de `fotos-originales/galeria/` y corré `npm run fotos`.
+Entra todo lo que haya en esa carpeta, en orden alfabético. La descripción que leen los lectores de
+pantalla se escribe en `TEXTOS_ALT`, dentro de `src/components/home/Galeria.tsx`.
+
+> Las fotos sueltas en `fotos-originales/` que no figuran en la tabla quedan guardadas pero el
+> sitio no las usa. Los recortes están definidos en `scripts/optimizar-fotos.mjs`: si cambiás la
+> proporción de una sección en el componente, cambiala también ahí.
 
 ---
 
@@ -218,6 +259,8 @@ Arquitectura en capas, con las dependencias apuntando siempre hacia abajo: la l�
 la presentación, y la presentación no sabe de dónde salen los datos.
 
 ```
+fotos-originales/  Fotos del local y logo como vinieron, sin optimizar (no se publica)
+public/img/        Las imágenes que sirve el sitio (parte las genera `npm run fotos`)
 src/
   data/        Datos: productos.json, negocio.ts y el punto de entrada al catálogo
                (imagenes.generado.json lo escribe el script: no se edita a mano)
@@ -246,11 +289,10 @@ agregar un carrito es sumar una capa, no reescribir lo que hay.
 ## Qué falta completar
 
 - [ ] Número de WhatsApp (`src/data/negocio.ts`)
-- [ ] Historia del local, en el bloque "Sobre Vinería Martu" (`src/components/home/SobreNosotros.tsx`, buscar `[COMPLETAR]`)
+- [ ] Que Martín y Karina revisen el texto de "Sobre Vinería Martu" (`src/components/home/SobreNosotros.tsx`): está escrito con los datos conocidos, pero la historia del local la saben ellos
 - [ ] **Cargar los precios** en `src/data/productos.json` (hoy todos muestran "Consultar")
 - [ ] Revisar nombres, cosechas y descripciones de los 23 productos
 - [ ] Sumar el resto del catálogo (blancos, rosados, cervezas, aperitivos): cada categoría aparece sola en el sitio cuando tiene productos
-- [ ] Fotos reales del logo original, el local y la galería
 - [ ] Fotos de las botellas nuevas que se vayan sumando (`npm run imagenes` dice cuáles faltan)
 - [ ] Dominio definitivo (`sitioUrl` en `src/data/negocio.ts` y `public/robots.txt`)
 
