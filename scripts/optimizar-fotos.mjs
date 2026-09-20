@@ -48,7 +48,9 @@ const SUELTAS = [
     seccion: 'hero',
   },
   {
-    origen: 'tablas-vineria.jpg',
+    // Sí, es la misma foto que el hero: va recortada distinto (4:5 en vez de
+    // 3:4), así que son dos archivos y no uno reutilizado.
+    origen: 'frente-vineria-martu.jpg',
     destino: 'public/img/nosotros.webp',
     ancho: 1000,
     alto: 1250, // 4:5, el bloque "Sobre Vinería Martu"
@@ -216,8 +218,8 @@ const leeme = [
   '| Archivo | Se convierte en |',
   '|---|---|',
   '| `logo-vineriamartu.jpeg` | `public/img/logo-martu.png` (con el fondo blanco sacado) |',
-  '| `frente-vineria-martu.jpg` | `public/img/hero.webp` (portada del inicio) |',
-  '| `tablas-vineria.jpg` | `public/img/nosotros.webp` (sección "Sobre Vinería Martu") |',
+  '| `frente-vineria-martu.jpg` | `public/img/hero.webp` (portada del inicio, 3:4) |',
+  '| `frente-vineria-martu.jpg` | `public/img/nosotros.webp` ("Sobre Vinería Martu", 4:5) |',
   '| `galeria/*` | `public/img/galeria/*.webp` (galería del inicio) |',
   '',
   'Para cambiar la galería: agregá o sacá fotos de `galeria/` y corré `npm run fotos`.',

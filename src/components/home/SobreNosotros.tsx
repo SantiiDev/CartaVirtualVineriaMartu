@@ -12,7 +12,9 @@ export function SobreNosotros() {
         <Reveal>
           <Imagen
             src="/img/nosotros.webp"
-            alt="Interior de la vinería: barriles con tablas de madera y estuches de regalo"
+            // Es la misma foto que el hero, con otro recorte: el alt se escribe
+            // distinto para que un lector de pantalla no repita la misma frase.
+            alt="El local de Vinería Martu visto desde la vereda, con la vidriera y la entrada"
             fallback="/img/placeholder-foto.svg"
             className="aspect-[4/5] w-full rounded-sm object-cover"
           />

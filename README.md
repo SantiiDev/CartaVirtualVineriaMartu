@@ -199,7 +199,7 @@ Qué sale de dónde:
 |---|---|
 | `fotos-originales/logo-vineriamartu.jpeg` | `public/img/logo-martu.png`, con el fondo blanco sacado para que se vea bien sobre el header claro y sobre el footer oscuro |
 | `fotos-originales/frente-vineria-martu.jpg` | `public/img/hero.webp`, recortada 3:4 para la portada del inicio |
-| `fotos-originales/tablas-vineria.jpg` | `public/img/nosotros.webp`, recortada 4:5 para "Sobre Vinería Martu" |
+| `fotos-originales/frente-vineria-martu.jpg` | `public/img/nosotros.webp`, la misma foto recortada 4:5 para "Sobre Vinería Martu" |
 | `fotos-originales/galeria/*` | `public/img/galeria/*.webp`, cuadradas de 900 px |
 
 **Para cambiar la galería**: agregá o sacá fotos de `fotos-originales/galeria/` y corré `npm run fotos`.
